@@ -14,3 +14,10 @@ spring:
     check-template-location: true
     mode: HTML
     encoding: UTF-8
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
