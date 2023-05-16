@@ -1,3 +1,7 @@
+window.addEventListener("DOMContentLoaded", async (event) => {
+    await addressSubmitBtnListener();
+});
+
 //본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
 function findAddress() {
     new daum.Postcode({
@@ -52,4 +56,37 @@ function findAddress() {
             }
         }
     }).open();
+}
+
+// 주소 저장 버튼 리스너
+const addressSubmitBtnListener = async () => document.getElementById("addressSubmitBtn").addEventListener("click", async (event) => {
+    event.preventDefault();
+    const zipCode = document.getElementById("sample4_postcode").value
+    const roadNameAddress = document.getElementById("sample4_roadAddress").value
+    const landLotNumberAddress = document.getElementById("sample4_jibunAddress").value
+    const detailedAddress = document.getElementById("sample4_detailAddress").value
+    const body = {zipCode, roadNameAddress, landLotNumberAddress, detailedAddress}
+
+    const response = await ajax("/api/address", {'Content-Type': 'application/json'}, JSON.stringify(body), "POST")
+    let msg;
+    if(response.result != null) {
+        msg = response.return_msg;
+    } else {
+        alert(response.error_msg)
+    }
+
+    if(msg) showToast(msg)
+})
+
+
+const showToast = (title) => {
+    // Get the snackbar DIV
+    const snackbar = document.getElementById("snackbar");
+
+    // Add the "show" class to DIV
+    snackbar.className = "show";
+    snackbar.textContent = title
+
+    // After 3 seconds, remove the show class from DIV
+    setTimeout(function(){ snackbar.className = snackbar.className.replace("show", ""); }, 3000);
 }

@@ -5,7 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script src="/js/fetch.js"></script>
     <script src="/js/searchAddress.js"></script>
+    <link href="/css/style.css" rel="stylesheet">
     <title>우편 검색</title>
 </head>
 <body>
@@ -17,5 +19,12 @@
     <span id="guide" style="color:#999;display:none"></span>
     <input type="text" id="sample4_detailAddress" placeholder="상세주소">
     <input type="text" id="sample4_extraAddress" placeholder="참고항목">
+    <button id="addressSubmitBtn" type="button">서버에 저장</button>
+
+    <!-- The actual snackbar -->
+    <div id="snackbar"></div>
+    <!-- 로딩 스피너-->
+    <div class="loader"></div>
+    <div class="overlay"></div>
 </body>
 </html>
