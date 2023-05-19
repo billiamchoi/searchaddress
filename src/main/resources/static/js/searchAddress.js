@@ -117,14 +117,8 @@ const searchBtnListener = async () => document.getElementById("searchBtn").addEv
     event.preventDefault()
     const searchKeyword = document.getElementById("searchKeyword").value
     pageNum = 1;
-    const response = await ajax(`/api/search?query=${searchKeyword}&pageNum=${pageNum}`, {'Content-Type': 'application/json'}, null, "GET")
-    searchResult = response.results.juso;
     query = searchKeyword
-    drawSearchResult(searchResult)
-    searchResultClickListener()
-    drawPagination(response.results.common.currentPage, response.results.common.totalCount, response.results.common.countPerPage)
-    await pageBtnListener()
-    await prevNextBtnListener()
+    await loadPageResult(pageNum)
 })
 
 const drawPagination = (currentPage, totalCount, countPerPage) => {
