@@ -164,6 +164,7 @@ const pageBtnListener = () => {
 const closeBtnListener = () => document.getElementById("close").addEventListener("click", (event) => {
     document.getElementsByClassName("overlay")[0].classList.remove("show")
     document.getElementsByClassName("searchModal")[0].classList.remove("show")
+    document.getElementById("search-result").innerHTML = null;
 })
 
 const showToast = (title) => {
@@ -209,6 +210,7 @@ const searchResultClickListener = () => {
             document.getElementById("roadAddress").value = this.querySelector(".roadAdd").innerText
             document.getElementById("jibunAddress").value = this.querySelector(".jibun").innerText
             document.getElementsByClassName("searchModal")[0].classList.remove("show")
+            document.getElementById("search-result").innerHTML = null;
         })
     })
 }
