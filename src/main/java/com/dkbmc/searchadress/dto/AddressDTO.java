@@ -19,13 +19,13 @@ public class AddressDTO {
     @NoArgsConstructor
     public static class RequestSave{
         private Long id;
-        private Integer zipCode;
+        private String zipCode;
         private String roadNameAddress;
         private String landLotNumberAddress;
         private String detailedAddress;
 
         @Builder
-        public RequestSave(Long id, Integer zipCode, String roadNameAddress, String landLotNumberAddress, String detailedAddress){
+        public RequestSave(Long id, String zipCode, String roadNameAddress, String landLotNumberAddress, String detailedAddress){
             this.id = id;
             this.zipCode = zipCode;
             this.roadNameAddress = roadNameAddress;

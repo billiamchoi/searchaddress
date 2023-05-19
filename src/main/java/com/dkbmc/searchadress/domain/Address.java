@@ -14,7 +14,7 @@ public class Address {
     private Long id;
 
     @Column(name = "zip_code", nullable = false)
-    private Integer zipCode;
+    private String zipCode;
 
     @Column(name= "road_name_address", nullable = false, length = 5000)
     private String roadNameAddress;
@@ -26,7 +26,7 @@ public class Address {
     private String detailedAddress;
 
     @Builder
-    public Address(Long id, Integer zipCode, String roadNameAddress, String landLotNumberAddress, String detailedAddress){
+    public Address(Long id, String zipCode, String roadNameAddress, String landLotNumberAddress, String detailedAddress){
         this.id = id;
         this.zipCode = zipCode;
         this.roadNameAddress = roadNameAddress;

@@ -37,10 +37,6 @@
     visibility: hidden;
 }
 
-.show {
-    visibility: visible;
-}
-
 /* The snackbar - position it at the bottom and in the middle of the screen */
 #snackbar {
     visibility: hidden; /* Hidden by default. Visible on click */
@@ -86,3 +82,107 @@
     from {top: 5%; opacity: 1;}
     to {top: 0; opacity: 0;}
 }
+
+.searchModal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    visibility: hidden;
+}
+
+
+.searchModalContainer {
+    background: white;
+    overflow: scroll;
+    width: 50%;
+    height: 80%;
+    margin-top: 5%;
+    margin-left: 30%;
+}
+
+.searchInputBox {
+    display: flex;
+    justify-content: center;
+    margin-top: 2em;
+    padding-top: 2em;
+    margin-bottom: 2em;
+}
+
+.show {
+    visibility: visible;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 2em;
+}
+
+.pagination a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    border: 1px solid #ddd;
+}
+
+.pagination a.active {
+    background-color: cornflowerblue;
+    color: white;
+    border: 1px solid cornflowerblue;
+}
+
+.pagination a:hover:not(.active) {background-color: #ddd;}
+
+.pagination a:first-child {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.pagination a:last-child {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+#search-result {
+    height: 80%;
+    padding-left: 15em;
+    padding-right: 15em;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+a.disabled {
+    background: lightgray;
+    pointer-events: none;
+    cursor: default;
+}
+
+.searchList {
+    cursor: pointer;
+}
+
+.searchList:hover {
+    background: cornflowerblue;
+}
+
+a:not(.disabled) {
+    cursor: pointer;
+}
+
+button {
+    cursor: pointer;
+}
+
+#searchBtn {
+    margin-left: 0.5em;
+}
+
+#close {
+    margin-left: 0.5em;
+}
+

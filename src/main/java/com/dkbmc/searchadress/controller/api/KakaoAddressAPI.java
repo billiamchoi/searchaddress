@@ -13,8 +13,8 @@ public class KakaoAddressAPI {
 
     public KakaoAddressAPI(KakaoService kakaoService) {this.kakaoService = kakaoService;}
 
-    @GetMapping(value = "/search", produces = "application/json; charset=UTF8")
-    public ResponseEntity<String> addressSearch(@RequestParam String query){
-        return ResponseEntity.ok(kakaoService.addressSearch(query));
-    }
+//    @GetMapping(value = "/search", produces = "application/json; charset=UTF8")
+//    public ResponseEntity<String> addressSearch(@RequestParam String query){
+//        return ResponseEntity.ok(kakaoService.addressSearch(query));
+//    }
 }

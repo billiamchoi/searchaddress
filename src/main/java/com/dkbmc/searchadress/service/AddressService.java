@@ -5,6 +5,8 @@ import com.dkbmc.searchadress.dto.AddressDTO;
 import com.dkbmc.searchadress.dto.ResponseDTO;
 import com.dkbmc.searchadress.repository.AddressRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Mono;
 
 @Service
 public class AddressService extends BaseService {
@@ -37,5 +39,21 @@ public class AddressService extends BaseService {
                     .build();
         }
         return responseDTO;
+    }
+
+    public String addressSearch(String query, int pageNum) {
+        Mono<String> exchangeToMono = WebClient.builder().baseUrl("https://business.juso.go.kr")
+                .build().get()
+                .uri(uriBuilder -> uriBuilder.path("/addrlink/addrLinkApi.do")
+                        .queryParam("keyword", query)
+                        .queryParam("currentPage", pageNum)
+                        .queryParam("countPerPage", 10)
+                        .queryParam("confmKey", "devU01TX0FVVEgyMDIzMDUxOTEwMDUxOTExMzc4OTA=")
+                        .queryParam("hstryYn", "Y")
+                        .queryParam("resultType", "json")
+                        .build()
+                )
+                .exchangeToMono(response -> response.bodyToMono(String.class));
+        return exchangeToMono.block();
     }
 }
