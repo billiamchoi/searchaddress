@@ -84,18 +84,22 @@ const addressSubmitBtnListener = async () => document.getElementById("addressSub
     const detailedAddress = document.getElementById("sample4_detailAddress").value
     const body = {zipCode, roadNameAddress, landLotNumberAddress, detailedAddress}
 
-    const response = await ajax("/api/address", {'Content-Type': 'application/json'}, JSON.stringify(body), "POST")
-    let msg;
-    if(response.result != null) {
-        msg = response.return_msg;
-    } else {
-        alert(response.error_msg)
+    if(checkInputs("kakao")){
+        const response = await ajax("/api/address", {'Content-Type': 'application/json'}, JSON.stringify(body), "POST")
+        let msg;
+        if(response.result != null) {
+            msg = response.return_msg;
+        } else {
+            alert(response.error_msg)
+        }
+
+        if(msg) {
+            showToast(msg)
+            emptyInputsWtIds(inputIds)
+        }
     }
 
-    if(msg) {
-        showToast(msg)
-        emptyInputsWtIds(inputIds)
-    }
+
 })
 
 const addressSubmitBtnListenerTwo = async () => document.getElementById("submit_btn").addEventListener("click", async (event) => {
@@ -107,17 +111,19 @@ const addressSubmitBtnListenerTwo = async () => document.getElementById("submit_
     const detailedAddress = document.getElementById("detailAddress").value
     const body = {zipCode, roadNameAddress, landLotNumberAddress, detailedAddress}
 
-    const response = await ajax("/api/address", {'Content-Type': 'application/json'}, JSON.stringify(body), "POST")
-    let msg;
-    if(response.result != null) {
-        msg = response.return_msg;
-    } else {
-        alert(response.error_msg)
-    }
+    if(checkInputs("juso")){
+        const response = await ajax("/api/address", {'Content-Type': 'application/json'}, JSON.stringify(body), "POST")
+        let msg;
+        if(response.result != null) {
+            msg = response.return_msg;
+        } else {
+            alert(response.error_msg)
+        }
 
-    if(msg) {
-        showToast(msg)
-        emptyInputsWtIds(inputIds)
+        if(msg) {
+            showToast(msg)
+            emptyInputsWtIds(inputIds)
+        }
     }
 })
 
@@ -257,4 +263,52 @@ const loadPageResult = async (pageNum) => {
     drawPagination(response.results.common.currentPage, response.results.common.totalCount, response.results.common.countPerPage)
     await pageBtnListener()
     await prevNextBtnListener()
+}
+
+const checkInputs = (type) => {
+    switch (type) {
+        case "kakao" :
+            if(document.getElementById("sample4_postcode").value === "") {
+                alert("우편번호가 공란입니다.")
+                return false
+            }
+
+            if(document.getElementById("sample4_roadAddress").value === "") {
+                alert("도로명주소가 공란입니다.")
+                return false
+            }
+
+            if(document.getElementById("sample4_jibunAddress").value === "") {
+                alert("지번주소가 공란입니다.")
+                return false
+            }
+
+            if(document.getElementById("sample4_detailAddress").value === "") {
+                alert("상세주소가 공란입니다.")
+                return false
+            }
+            return true
+
+        case "juso"  :
+            if(document.getElementById("postcode").value === "") {
+                alert("우편번호가 공란입니다.")
+                return false
+            }
+
+            if(document.getElementById("roadAddress").value === "") {
+                alert("도로명주소가 공란입니다.")
+                return false
+            }
+
+            if(document.getElementById("jibunAddress").value === "") {
+                alert("지번주소가 공란입니다.")
+                return false
+            }
+
+            if(document.getElementById("detailAddress").value === "") {
+                alert("상세주소가 공란입니다.")
+                return false
+            }
+            return true
+    }
 }
