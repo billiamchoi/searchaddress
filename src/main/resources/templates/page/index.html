@@ -1,49 +1,39 @@
-<!DOCTYPE html><html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-    <script src="/js/fetch.js"></script>
-    <script src="/js/searchAddress.js"></script>
-    <link href="/css/style.css" rel="stylesheet">
-    <title>우편 검색</title>
-</head>
-<body>
-    <h1>Kakao 우편번호 서비스</h1>
-    <input type="text" id="sample4_postcode" placeholder="우편번호">
-    <input type="button" onclick="findAddress()" value="우편번호 찾기"><br>
-    <input type="text" id="sample4_roadAddress" placeholder="도로명주소">
-    <input type="text" id="sample4_jibunAddress" placeholder="지번주소">
-    <span id="guide" style="color:#999;display:none"></span>
-    <input type="text" id="sample4_detailAddress" placeholder="상세주소">
-    <input type="text" id="sample4_extraAddress" placeholder="참고항목">
-    <button id="addressSubmitBtn" type="button">서버에 저장</button>
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/defaultLayout}"
+      layout:fragment="Content"
+>
+    <body>
+        <h1 class="header">Kakao 우편번호 서비스</h1>
+        <input type="text" id="sample4_postcode" class="zip-code-input" placeholder="우편번호">
+        <input type="button" class="btn btn-outline-secondary" onclick="findAddress()" value="우편번호 찾기"><br>
+        <input type="text" id="sample4_roadAddress" class="large-input" placeholder="도로명주소">
+        <input type="text" id="sample4_jibunAddress" class="large-input" placeholder="지번주소">
+        <span id="guide" style="color:#999;display:none"></span>
+        <input type="text" id="sample4_detailAddress" class="large-input" placeholder="상세주소">
+        <input type="text" id="sample4_extraAddress" placeholder="참고항목">
+        <button id="addressSubmitBtn" class="btn btn-outline-primary" type="button">서버에 저장</button>
 
-    <h1>주소기반산업지원서비스 REST API</h1>
-    <input type="text" id="postcode" placeholder="우편번호">
-    <input type="button" id="find_postcode" value="우편번호 찾기"><br>
-    <input type="text"  id="roadAddress" placeholder="도로명주소">
-    <input type="text" id="jibunAddress" placeholder="지번주소">
-    <input type="text"  id="detailAddress" placeholder="상세주소">
-    <input type="text"  placeholder="참고항목">
-    <button id="submit_btn" type="button">서버에 저장</button>
+        <h1 class="header">주소기반산업지원서비스 REST API</h1>
+        <input type="text" id="postcode" class="zip-code-input" placeholder="우편번호">
+        <input type="button" class="btn btn-outline-secondary" id="find_postcode" value="우편번호 찾기"><br>
+        <input type="text"  id="roadAddress" class="large-input" placeholder="도로명주소">
+        <input type="text" id="jibunAddress" class="large-input" placeholder="지번주소">
+        <input type="text"  id="detailAddress" class="large-input" placeholder="상세주소">
+        <button id="submit_btn" class="btn btn-outline-primary" type="button">서버에 저장</button>
 
-    <section class="searchModal">
-        <div class="searchModalContainer">
-            <h2 class="searchHeader">우편번호 검색</h2>
-            <div class="searchInputBox">
-                <input type="text" id="searchKeyword" onkeydown = "if (event.keyCode === 13) document.getElementById('searchBtn').click()" >
-                <button id="searchBtn" type="submit">검색</button>
-                <button id="close">닫기</button>
+        <section class="searchModal">
+            <div class="searchModalContainer">
+                <h2 class="searchHeader">우편번호 검색</h2>
+                <div class="searchInputBox">
+                    <input type="text" id="searchKeyword" onkeydown = "if (event.keyCode === 13) document.getElementById('searchBtn').click()" >
+                    <button type="submit" id="searchBtn" class="btn btn-outline-primary">검색</button>
+                    <button id="close" class="btn btn-outline-dark" >닫기</button>
+                </div>
+                <div id="search-result"></div>
             </div>
-            <div id="search-result"></div>
-        </div>
-    </section>
-    <!-- The actual snackbar -->
-    <div id="snackbar"></div>
-    <!-- 로딩 스피너-->
-    <div class="loader"></div>
-    <div class="overlay"></div>
-</body>
+        </section>
+    </body>
 </html>

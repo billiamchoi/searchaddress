@@ -68,9 +68,16 @@ function findAddress() {
     }).open();
 }
 
+const emptyInputsWtIds = (inputIds) => {
+    for (let id of inputIds) {
+        document.getElementById(id).value = "";
+    }
+}
+
 // 주소 저장 버튼 리스너
 const addressSubmitBtnListener = async () => document.getElementById("addressSubmitBtn").addEventListener("click", async (event) => {
     event.preventDefault();
+    const inputIds = ["sample4_postcode", "sample4_roadAddress", "sample4_jibunAddress", "sample4_detailAddress", "sample4_extraAddress"]
     const zipCode = document.getElementById("sample4_postcode").value
     const roadNameAddress = document.getElementById("sample4_roadAddress").value
     const landLotNumberAddress = document.getElementById("sample4_jibunAddress").value
@@ -85,11 +92,15 @@ const addressSubmitBtnListener = async () => document.getElementById("addressSub
         alert(response.error_msg)
     }
 
-    if(msg) showToast(msg)
+    if(msg) {
+        showToast(msg)
+        emptyInputsWtIds(inputIds)
+    }
 })
 
 const addressSubmitBtnListenerTwo = async () => document.getElementById("submit_btn").addEventListener("click", async (event) => {
     event.preventDefault();
+    const inputIds = ["postcode", "roadAddress", "jibunAddress", "detailAddress"]
     const zipCode = document.getElementById("postcode").value
     const roadNameAddress = document.getElementById("roadAddress").value
     const landLotNumberAddress = document.getElementById("jibunAddress").value
@@ -104,7 +115,10 @@ const addressSubmitBtnListenerTwo = async () => document.getElementById("submit_
         alert(response.error_msg)
     }
 
-    if(msg) showToast(msg)
+    if(msg) {
+        showToast(msg)
+        emptyInputsWtIds(inputIds)
+    }
 })
 
 const findPostcodeBtnListener = () => document.getElementById("find_postcode").addEventListener("click", async (event) => {
