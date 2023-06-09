@@ -16,8 +16,11 @@ spring:
     encoding: UTF-8
   jpa:
     hibernate:
-      ddl-auto: none
+      ddl-auto: create
     show-sql: true
     properties:
       hibernate:
         format_sql: true
+
+DATA:
+  HOLIDAYKEY: jclfLVr8JXUFW8HoAu56wN4H/6AXiLKqAfXdSZOosnq4shwUN8iLtQfG6mhaQOStzbLgWXvxLrOZ5kzUqUQ3Vg==
