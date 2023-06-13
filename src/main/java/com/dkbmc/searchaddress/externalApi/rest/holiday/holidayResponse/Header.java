@@ -1,4 +1,4 @@
-package com.dkbmc.searchaddress.api.rest.holiday.holidayResponse;
+package com.dkbmc.searchaddress.externalApi.rest.holiday.holidayResponse;
 
 import javax.xml.bind.annotation.XmlElement;
 

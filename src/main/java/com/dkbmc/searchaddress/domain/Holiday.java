@@ -1,6 +1,7 @@
 package com.dkbmc.searchaddress.domain;
 
-import com.dkbmc.searchaddress.api.rest.holiday.holidayResponse.Item;
+import com.dkbmc.searchaddress.externalApi.rest.holiday.holidayResponse.Item;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -27,6 +28,10 @@ public class Holiday {
     private Boolean holiday;
 
     private LocalDate locDate;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "company_id")
+    private Company company;
 
     @Builder
     public Holiday(Item holiday) {

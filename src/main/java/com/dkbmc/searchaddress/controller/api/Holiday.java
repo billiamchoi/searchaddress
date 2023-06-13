@@ -1,5 +1,6 @@
 package com.dkbmc.searchaddress.controller.api;
 
+import com.dkbmc.searchaddress.dto.ResponseDTO;
 import com.dkbmc.searchaddress.service.HolidayService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -25,13 +26,18 @@ public class Holiday {
      * @return boolean
      */
 
-    @GetMapping(value = "/holiday", produces = "application/json")
+    @GetMapping(value = "/isHoliday", produces = "application/json")
     public ResponseEntity<Boolean> isHoliday (@RequestParam("requestDate") String requestDate){
         return ResponseEntity.ok().body(holidayService.isHoliday(LocalDate.parse(requestDate, DateTimeFormatter.ofPattern("yyyy-MM-dd"))));
     }
 
     @GetMapping(value = "/holidayInsert")
     public ResponseEntity<String> holidayInsert (){
-        return ResponseEntity.ok().body(holidayService.insertHoliday());
+        return ResponseEntity.ok().body(holidayService.insertHolidayFromOpenAPI());
+    }
+
+    @GetMapping(value = "/holiday")
+    public ResponseEntity<ResponseDTO> getHolidays(){
+        return ResponseEntity.ok().body(holidayService.getHolidays());
     }
 }

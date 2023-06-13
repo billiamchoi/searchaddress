@@ -1,4 +1,4 @@
-package com.dkbmc.searchaddress.api.rest.holiday.holidayResponse;
+package com.dkbmc.searchaddress.externalApi.rest.holiday.holidayResponse;
 
 
 import javax.xml.bind.annotation.XmlElement;
@@ -9,7 +9,6 @@ public class Item {
     private String isHoliday;
     private int locdate;
     private int seq;
-
     @XmlElement(name = "dateKind")
     public String getDateKind() { return dateKind; }
 

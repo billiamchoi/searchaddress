@@ -1,7 +1,7 @@
-package com.dkbmc.searchaddress.api.rest.holiday;
+package com.dkbmc.searchaddress.externalApi.rest.holiday;
 
-import com.dkbmc.searchaddress.api.rest.holiday.holidayResponse.HolidayResponseDTO;
-import com.dkbmc.searchaddress.api.rest.holiday.holidayResponse.Item;
+import com.dkbmc.searchaddress.externalApi.rest.holiday.holidayResponse.HolidayResponseDTO;
+import com.dkbmc.searchaddress.externalApi.rest.holiday.holidayResponse.Item;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.http.codec.xml.Jaxb2XmlDecoder;
