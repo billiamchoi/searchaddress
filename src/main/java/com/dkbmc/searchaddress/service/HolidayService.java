@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class HolidayService extends BaseService {
@@ -26,13 +27,30 @@ public class HolidayService extends BaseService {
         return holidayRepository.findByLocDateAndHolidayIsTrue(requestDay).isPresent();
     }
 
-    public String insertHolidayFromOpenAPI() {
+    public ResponseDTO insertHolidayFromOpenAPI() {
         List<Item> holidays = holidayAPI.holidayInfo();
-        if (holidays.size() > 0) {
+        if (holidays != null) {
             bulkInsert(holidays);
         }
-        return "ok";
-}
+        return responseDTO = ResponseDTO.builder()
+                .return_msg("성공적으로 다음달 국경일 추가 완료하였습니다.")
+                .build();
+    }
+
+    public ResponseDTO insertHolidayFromOpenAPILoop() {
+        LocalDate now = LocalDate.now();
+        String year = String.valueOf(now.getYear());
+        for(int month = 1; month <= 12; month++) {
+            List<Item> holidays = holidayAPI.certainHolidayInfo(month);
+            if (holidays != null) {
+                bulkInsert(holidays);
+            }
+        }
+
+        return responseDTO = ResponseDTO.builder()
+                .return_msg("성공적으로 다음달 국경일 추가 완료하였습니다.")
+                .build();
+    }
 
     public void bulkInsert(List<Item> request) {
         List<Holiday> holidays = request.stream().map(item -> Holiday.builder()
@@ -47,6 +65,41 @@ public class HolidayService extends BaseService {
         responseDTO = ResponseDTO.builder()
                 .result(holidayDTOList)
                 .return_msg("성공적으로 모든 공휴일 조회하였습니다.")
+                .build();
+        return responseDTO;
+    }
+
+    public ResponseDTO createHoliday(HolidayDTO.RequestSave request) {
+        Holiday h = holidayRepository.save(request.toEntity());
+        responseDTO = ResponseDTO.builder()
+                .result(h)
+                .return_msg("성공적으로 모든 공휴일 생성하였습니다.")
+                .build();
+        return responseDTO;
+    }
+
+    public ResponseDTO deleteHoliday(Long id) {
+        holidayRepository.deleteById(id);
+        responseDTO = ResponseDTO.builder()
+                .return_msg("성공적으로 해당 공휴일 삭제하였습니다.")
+                .build();
+        return responseDTO;
+    }
+
+    public ResponseDTO findById(Long id) {
+        Optional<Holiday> h = holidayRepository.findById(id);
+        HolidayDTO holidayDTO = new HolidayDTO(h.get());
+        responseDTO = ResponseDTO.builder()
+                .result(holidayDTO)
+                .return_msg("성공적으로 공휴일 조회하였습니다.")
+                .build();
+        return responseDTO;
+    }
+
+    public ResponseDTO updateHoliday(HolidayDTO.RequestUpdate request) {
+        Holiday h = holidayRepository.save(request.toEntity());
+        responseDTO = ResponseDTO.builder()
+                .return_msg("성공적으로 모든 공휴일 수정하였습니다.")
                 .build();
         return responseDTO;
     }

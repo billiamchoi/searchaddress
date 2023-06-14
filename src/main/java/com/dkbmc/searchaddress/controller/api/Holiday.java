@@ -1,12 +1,11 @@
 package com.dkbmc.searchaddress.controller.api;
 
+import com.dkbmc.searchaddress.dto.HolidayDTO;
 import com.dkbmc.searchaddress.dto.ResponseDTO;
 import com.dkbmc.searchaddress.service.HolidayService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -32,12 +31,37 @@ public class Holiday {
     }
 
     @GetMapping(value = "/holidayInsert")
-    public ResponseEntity<String> holidayInsert (){
+    public ResponseEntity<ResponseDTO>  holidayInsert (){
         return ResponseEntity.ok().body(holidayService.insertHolidayFromOpenAPI());
+    }
+
+    @GetMapping(value = "/holidayInsertYearly")
+    public ResponseEntity<ResponseDTO>  holidayInsertYearly (){
+        return ResponseEntity.ok().body(holidayService.insertHolidayFromOpenAPILoop());
     }
 
     @GetMapping(value = "/holiday")
     public ResponseEntity<ResponseDTO> getHolidays(){
         return ResponseEntity.ok().body(holidayService.getHolidays());
+    }
+
+    @PostMapping(value = "/holiday")
+    public ResponseEntity<ResponseDTO> createHoliday(@RequestBody HolidayDTO.RequestSave request){
+        return ResponseEntity.ok().body(holidayService.createHoliday(request));
+    }
+
+    @DeleteMapping(value = "/holiday/{id}")
+    public ResponseEntity<ResponseDTO> deleteHoliday(@PathVariable Long id){
+        return ResponseEntity.ok().body(holidayService.deleteHoliday(id));
+    }
+
+    @GetMapping(value = "/holiday/{id}")
+    public ResponseEntity<ResponseDTO> findHolidayById(@PathVariable Long id){
+        return ResponseEntity.ok().body(holidayService.findById(id));
+    }
+
+    @PutMapping(value = "/holiday")
+    public ResponseEntity<ResponseDTO> updateHoliday(@RequestBody HolidayDTO.RequestUpdate request){
+        return ResponseEntity.ok().body(holidayService.updateHoliday(request));
     }
 }

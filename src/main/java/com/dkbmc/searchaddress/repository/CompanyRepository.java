@@ -1,0 +1,8 @@
+package com.dkbmc.searchaddress.repository;
+
+import com.dkbmc.searchaddress.domain.Company;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface CompanyRepository extends JpaRepository<Company, Long> {
+
+}

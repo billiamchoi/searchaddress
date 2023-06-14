@@ -5,6 +5,9 @@
       layout:decorate="~{layouts/defaultLayout}"
       layout:fragment="Content"
 >
+    <script src="/js/searchAddress.js"></script>
+    <script src="/js/holidayRead.js"></script>
+
     <body>
         <h1 class="header">Kakao 우편번호 서비스</h1>
         <input type="text" id="sample4_postcode" class="zip-code-input" placeholder="우편번호">
@@ -38,7 +41,6 @@
         <h1 class="header">휴일 관리</h1>
         <div id="holiday_table">
         </div>
-
-
+        <a class="btn btn-outline-primary" href="/holiday/create" role="button">휴일 생성</a>
     </body>
 </html>

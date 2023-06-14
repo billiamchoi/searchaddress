@@ -1,3 +1,12 @@
+body {
+    margin-left: 3rem;
+    margin-right: 3rem;
+}
+
+tr {
+    vertical-align: middle;
+}
+
 .loader {
     z-index: 101;
     visibility: hidden;

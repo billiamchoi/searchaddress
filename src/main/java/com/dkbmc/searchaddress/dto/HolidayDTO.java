@@ -12,6 +12,7 @@ import java.time.LocalDate;
 
 @Getter
 public class HolidayDTO {
+    private Long id;
     private String dateName;
     private Boolean holiday;
     private LocalDate locDate;
@@ -19,10 +20,17 @@ public class HolidayDTO {
 
     @Builder
     public HolidayDTO(Holiday entity) {
+        this.id = entity.getId();
         this.dateName = entity.getDateName();
         this.holiday = entity.getHoliday();
         this.locDate = entity.getLocDate();
-        this.company = entity.getCompany();
+        if (entity.getCompany() != null) {
+            this.company = Company.builder()
+                    .id(entity.getCompany().getId())
+                    .name(entity.getCompany().getName())
+                    .build();
+        }
+
     }
 
     @Getter
@@ -39,6 +47,33 @@ public class HolidayDTO {
             this.holiday = holiday;
             this.locDate = locDate;
             this.company = company;
+        }
+
+        public Holiday toEntity() {
+            return new Holiday(this.dateName,this.holiday, this.locDate, this.company);
+        }
+    }
+
+    @Getter
+    @NoArgsConstructor
+    public static class RequestUpdate {
+        private Long id;
+        private String dateName;
+        private Boolean holiday;
+        private LocalDate locDate;
+        private Company company;
+
+        @Builder
+        public RequestUpdate(Long id, String dateName, Boolean holiday, LocalDate locDate, Company company) {
+            this.id = id;
+            this.dateName = dateName;
+            this.holiday = holiday;
+            this.locDate = locDate;
+            this.company = company;
+        }
+
+        public Holiday toEntity() {
+            return new Holiday(this. id, this.dateName,this.holiday, this.locDate, this.company);
         }
     }
 }

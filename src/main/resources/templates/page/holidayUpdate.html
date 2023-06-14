@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/defaultLayout}"
+      layout:fragment="Content"
+>
+
+<script src="/js/holidayUpdate.js"></script>
+
+<body>
+    <h1 class="header">휴일 수정</h1>
+    <input type="text" class="form-control" id="id" hidden>
+    <div class="mb-3">
+        <label for="name" class="form-label">이름</label>
+        <input type="text" class="form-control" id="name" placeholder="이름">
+    </div>
+    <div class="mb-3">
+        <label class="form-label">공휴일 유무</label>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="holiday" id="isHoliday" value="true" checked>
+            <label class="form-check-label" for="isHoliday">
+                공휴일 O
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="holiday" id="isNotHoliday" value="false">
+            <label class="form-check-label" for="isNotHoliday">
+                공휴일 X
+            </label>
+        </div>
+    </div>
+    <div class="mb-3">
+        <label for="locDate">일자</label>
+        <input id="locDate" class="form-control" type="date" />
+    </div>
+    <div class="mb-3">
+        <label for="company">회사</label>
+        <select id="company" class="form-select">
+        </select>
+    </div>
+    <a class="btn btn-outline-secondary" href="/" role="button">뒤로</a>
+    <button type="submit" id="holidayUpdateSubmit" class="btn btn-outline-primary">수정</button>
+</body>
+</html>

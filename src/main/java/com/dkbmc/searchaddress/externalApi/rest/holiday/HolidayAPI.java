@@ -50,4 +50,32 @@ public class HolidayAPI {
 
         return Objects.requireNonNull(result).getBody().getItems().getItems();
     }
+
+    public List<Item> certainHolidayInfo(int month) {
+        LocalDate now = LocalDate.now();
+        String year = String.valueOf(now.getYear());
+        String certainMonth = String.valueOf(month);
+        String twoWordMonth = certainMonth.length() == 1 ? certainMonth.replace(certainMonth, "0" + certainMonth) : certainMonth;
+
+        webclient = WebClient.builder()
+                .baseUrl("http://apis.data.go.kr/B090041/openapi/service/SpcdeInfoService")
+                .exchangeStrategies(ExchangeStrategies.builder()
+                        .codecs(configurer -> configurer.defaultCodecs().jaxb2Decoder(new Jaxb2XmlDecoder()))
+                        .build())
+                .build();
+        Mono<HolidayResponseDTO> response;
+        response = webclient.get()
+                .uri(uriBuilder -> uriBuilder
+                        .path("/getHoliDeInfo")
+                        .queryParam("solYear", "{year}")
+                        .queryParam("solMonth", "{month}")
+                        .queryParam("ServiceKey", "{serviceKey}")
+                        .build(year, twoWordMonth, key))
+                .accept(MediaType.APPLICATION_XML)
+                .retrieve()
+                .bodyToMono(HolidayResponseDTO.class);
+        HolidayResponseDTO result = response.block();
+
+        return Objects.requireNonNull(result).getBody().getItems().getItems();
+    }
 }

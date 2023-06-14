@@ -1,5 +1,6 @@
 package com.dkbmc.searchaddress.domain;
 
+import com.dkbmc.searchaddress.dto.HolidayDTO;
 import com.dkbmc.searchaddress.externalApi.rest.holiday.holidayResponse.Item;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AccessLevel;
@@ -38,5 +39,20 @@ public class Holiday {
         this.dateName = holiday.getDateName();
         this.holiday = holiday.getIsHoliday().equals("Y");
         this.locDate = LocalDate.parse(String.valueOf(holiday.getLocdate()), DateTimeFormatter.ofPattern("yyyyMMdd"));
+    }
+
+    public Holiday(String dateName, Boolean holiday, LocalDate locDate, Company company) {
+        this.dateName = dateName;
+        this.holiday = holiday;
+        this.locDate = locDate;
+        this.company =company;
+    }
+
+    public Holiday(Long id, String dateName, Boolean holiday, LocalDate locDate, Company company) {
+        this.id = id;
+        this.dateName = dateName;
+        this.holiday = holiday;
+        this.locDate = locDate;
+        this.company =company;
     }
 }
