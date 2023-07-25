@@ -2,8 +2,6 @@ package com.dkbmc.searchaddress.dto;
 
 import com.dkbmc.searchaddress.domain.Company;
 import com.dkbmc.searchaddress.domain.Holiday;
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

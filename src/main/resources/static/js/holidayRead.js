@@ -47,7 +47,6 @@ const drawHolidayTable = (holidays) => {
                     <td><button class="deleteBtn btn btn-danger" value=${value.id}>삭제</button></td>
                   </tr>`
             }
-
         })
     }
     html +=     `</tbody>`;

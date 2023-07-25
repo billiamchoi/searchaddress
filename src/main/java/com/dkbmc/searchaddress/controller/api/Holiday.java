@@ -2,6 +2,7 @@ package com.dkbmc.searchaddress.controller.api;
 
 import com.dkbmc.searchaddress.dto.HolidayDTO;
 import com.dkbmc.searchaddress.dto.ResponseDTO;
+import com.dkbmc.searchaddress.exception.NoDataFoundException;
 import com.dkbmc.searchaddress.service.HolidayService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -56,7 +57,7 @@ public class Holiday {
     }
 
     @GetMapping(value = "/holiday/{id}")
-    public ResponseEntity<ResponseDTO> findHolidayById(@PathVariable Long id){
+    public ResponseEntity<ResponseDTO> findHolidayById(@PathVariable Long id) throws NoDataFoundException {
         return ResponseEntity.ok().body(holidayService.findById(id));
     }
 

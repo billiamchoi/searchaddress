@@ -2,6 +2,7 @@ package com.dkbmc.searchaddress.service;
 
 import com.dkbmc.searchaddress.dto.HolidayDTO;
 import com.dkbmc.searchaddress.dto.ResponseDTO;
+import com.dkbmc.searchaddress.exception.NoDataFoundException;
 import com.dkbmc.searchaddress.externalApi.rest.holiday.HolidayAPI;
 import com.dkbmc.searchaddress.externalApi.rest.holiday.holidayResponse.Item;
 import com.dkbmc.searchaddress.domain.Holiday;
@@ -86,9 +87,9 @@ public class HolidayService extends BaseService {
         return responseDTO;
     }
 
-    public ResponseDTO findById(Long id) {
-        Optional<Holiday> h = holidayRepository.findById(id);
-        HolidayDTO holidayDTO = new HolidayDTO(h.get());
+    public ResponseDTO findById(Long id) throws NoDataFoundException {
+        Holiday h = holidayRepository.findById(id).orElseThrow(()-> new NoDataFoundException("id "+id+"번 휴일이 존재하지 않습니다."));
+        HolidayDTO holidayDTO = new HolidayDTO(h);
         responseDTO = ResponseDTO.builder()
                 .result(holidayDTO)
                 .return_msg("성공적으로 공휴일 조회하였습니다.")
